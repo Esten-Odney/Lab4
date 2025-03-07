@@ -84,7 +84,15 @@ print("""
     "Next, I will show you my mighty quack, which will give you extra strength in battle."
     """)
 
-def quack():
+def quack(old_power, duckyName, duck_status):
+    if duck_status:
+        quack_power = old_power * random.randint(2, 4)
+        print(f"📢 {duckyName} lets out a mighty (but still cute) quack.")
+        print(f"You feel much stronger, your power is now {quack_power}")
+        return quack_power
+    else:
+        print("🚫 Nothing happens, maybe you need to call your duck first")
+        return old_power
     """
     This function quacks the duck, and amplifies the hero's damage if the duck is toggled on. 
     If the duck is toggled off it does not amplify damage.
@@ -129,7 +137,19 @@ print("""
     "I'm going to throw this rock at you", your feathered friend says,  "The rock attacks with a 
     power of 2. Can you withstand its force?"
     """)   
-def defend():
+def defend(hero_health, enemy_name, enemy_power, duck_status):
+    enemy_attack = enemy_power * random.randint(1, 6)
+    if duck_status:
+        enemy_attack = enemy_attack // 5
+        print("The duck defense reduces it to", enemy_attack)
+    hero_health -= enemy_attack
+    print(f"🔰 You have been attacked for {enemy_attack} points")
+    if hero_health <= 0:
+        print("💀 You have been defeated!")
+    else:
+        print(f"😣 You have {hero_health} health points left")
+    return hero_health
+
     """
     Reduces the hero's health by the enemy's attack power, multiplied by a random integer. If the
     duck is toggled on the damage will be divided by 5
